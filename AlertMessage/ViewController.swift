@@ -12,7 +12,36 @@ class ViewController: UIViewController {
     }
 
     @IBAction func signUpTiklandi(_ sender: Any) {
-        let uyariMesaji = UIAlertController(title: "Hata Mesajı", message: "Email yanlış verildi", preferredStyle: .alert)
+        
+        // Email kontrolü
+        if email.text == "" {
+            mesaj(title: "Hata", mesaj: "Email boş olamaz")
+            return
+        }
+        
+        // Şifre kontrolü
+       else if sifre.text == "" {
+            mesaj(title: "Hata", mesaj: "Şifre boş olamaz")
+            return
+        }
+        
+        // Şifre tekrar kontrolü
+        else if  sifre2.text == "" {
+            mesaj(title: "Hata", mesaj: "Şifre tekrar boş olamaz")
+            return
+        }
+        
+        // Şifrelerin eşitliği kontrolü
+        else if sifre.text != sifre2.text {
+            mesaj(title: "Hata", mesaj: "Şifreler uyuşmuyor")
+        } else {
+            // Kayıt başarılı
+            mesaj(title: "Tebrikler", mesaj: "Kayıt başarılı")
+        }
+    }
+
+    func mesaj(title: String, mesaj: String) {
+        let uyariMesaji = UIAlertController(title: title, message: mesaj, preferredStyle: .alert)
         
         let okButton = UIAlertAction(title: "OK", style: .default) { action in
             // OK butonuna tıklanınca olacaklar
@@ -23,3 +52,4 @@ class ViewController: UIViewController {
         self.present(uyariMesaji, animated: true, completion: nil)
     }
 }
+
